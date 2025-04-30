@@ -18,10 +18,15 @@ from aiogram.utils.exceptions import MessageNotModified, CantParseEntities, Mess
 # --- Библиотека для работы с Word ---
 from docx import Document
 # --- КОНФИГУРАЦИЯ ---
-# !!! НЕ ЗАБУДЬ ВСТАВИТЬ СВОИ ЗНАЧЕНИЯ !!!
-API_TOKEN = "8199872713:AAHwZq0lkZGvysbkaik6lFdpedeFjWlqay0" # Ваш API токен
-ADMIN_IDS = [1093014764] # Список ID администраторов
+# !!! Считываем API токен из переменной окружения !!!
+API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
+if not API_TOKEN:
+    # Если переменная окружения не установлена, бот не сможет работать
+    logging.error("Environment variable 'TELEGRAM_API_TOKEN' is not set!")
+    # Можно добавить здесь логику для выхода или ошибки
+    # raise ValueError("TELEGRAM_API_TOKEN is not set")
 # !!! ------------------------------------ !!!
+ADMIN_IDS = [1093014764] # Список ID администраторов
 DATA_DIR = "data"
 SCHEDULE_FILENAME = "schedule.docx"
 DB_FILENAME = "bot_data.json"
